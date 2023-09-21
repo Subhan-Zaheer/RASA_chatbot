@@ -1,0 +1,66 @@
+version: '3.1'
+actions:
+- utter_tell_about_duration_of_case
+- utter_tell_about_expense_of_case
+- utter_guardianship_legal_advice
+- utter_tell_about_required_documents_of_guardianship
+- action_fallback
+intents:
+- ask_for_duration_of_case
+- ask_for_expense_on_case
+- ask_for_required_documents_for_guardianship
+- ask_legal_advice_for_guardianship
+- ask_for_court_location
+- goodbye
+- greet
+responses:
+  utter_greet:
+  - text: Assalam O Alaikum! Welcome to Legal Assistant
+  utter_cheer_up:
+  - text: 'Here is something to cheer you up:'
+    image: https://i.imgur.com/nGF1K8f.jpg
+  utter_did_that_help:
+  - text: Did that help you?
+  utter_happy:
+  - text: Great, carry on!
+  utter_goodbye:
+  - text: Thank You!!
+  utter_iamabot:
+  - text: 'NO!! Men ek '
+  utter_please_rephrase:
+  - text: Please sawaal dubara kren.
+  utter_default:
+  - text: Please apna sawaal dubara kren.
+  utter_guardianship_legal_advice:
+  - text: |-
+      Sure!!Agr aap ko Minor(bache) ki Guardianship chaiye or Agr Minor(Bacha) aap k paas hai, to aap Guardian Ward Act 1890 Section 7 k under case kr skte hain.
+       Agr Minor(Bacha) aap k paas nahi hai to ap Guardian Ward Act 1890 Section 25 k under case kr skte hain.
+  utter_tell_about_area_of_case:
+  - text: Ye chz yaad rahe k bacha jis zilla(region) me hoga, Case bi ussi region ki court me hoga.
+  utter_tell_about_duration_of_case:
+  - text: |-
+      Aam tor pe to kisi bi case ka duration specifically nahi btaya ja skta.
+       Kyn k case ka duration har case ka alag alag hoskta hai.
+       Lkn aam tor pe Guardianship k cases atleast 1 year tk chlte hain.
+  utter_tell_about_expense_of_case:
+  - text: |-
+      Aam tor pe to kisi bi case ka total expense(kharcha) specifically nahi btaya ja skta.
+       Kyn k case ka expenses(Kharcha) 2-3 chzon pe depend krta hai.
+       1. Case krne wale ki Financial status pr.
+       2. Wakeel(Lawyer) per.
+       3. Case k Duration pr.
+       Lkn phr bi On average Guardianship k case pr Rs.50,000 lag jate hain.
+  utter_tell_about_required_documents_of_guardianship:
+  - text: |-
+      Guardianship k case k liye aap ko following documents chaiye honge.
+       1. Nikkah Nama 2. Birth Certificate of Minor(Child).
+  utter_tell_about_the_age_guardianship:
+  - text: |-
+      Guardianship ki age Male Bache k liye 18 years hai 
+       Female bache k liye Shadi ki age tk hai. 
+       Agr bache ki age is se zyada hai to us ki Guardianship claim nahi hoskti... 
+session_config:
+  session_expiration_time: 60
+  carry_over_slots_to_new_session: true
+entities:
+- time

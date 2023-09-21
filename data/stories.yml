@@ -1,0 +1,93 @@
+version: "3.1"
+
+stories:
+
+- story: user ask for guardianship legal advice
+  steps:
+  - intent: greet
+  - action: utter_greet
+  - intent: ask_legal_advice_for_guardianship
+  - action: utter_guardianship_legal_advice
+  - action: utter_tell_about_the_age_guardianship
+  - action: utter_tell_about_area_of_case
+  - intent: ask_for_duration_of_case
+  - action: utter_tell_about_duration_of_case
+  - intent: ask_for_expense_on_case
+  - action: utter_tell_about_expense_of_case
+  - intent: ask_for_required_documents_for_guardianship
+  - action: utter_tell_about_required_documents_of_guardianship
+
+
+- story: user just ask for sections under the law
+  steps:
+  - intent: greet
+  - action: utter_greet
+  - intent: ask_legal_advice_for_guardianship
+  - action: utter_guardianship_legal_advice
+  - action: utter_tell_about_the_age_guardianship
+  - action: utter_tell_about_area_of_case  
+  - intent: goodbye
+  - action: utter_goodbye
+
+
+- story: user just for duration of the case
+  steps:
+  - intent: greet
+  - action: utter_greet
+  - intent: ask_for_duration_of_case
+  - action: utter_tell_about_duration_of_case
+  - intent: goodbye
+  - action: utter_goodbye
+
+- story: user just ask for the expenses on the case
+  steps:
+  - intent: greet
+  - action: utter_greet
+  - intent: ask_for_expense_on_case
+  - action: utter_tell_about_expense_of_case
+  - intent: goodbye
+  - action: utter_goodbye
+
+- story: user just ask for required documents
+  steps: 
+  - intent: greet
+  - action: utter_greet
+  - intent: ask_for_required_documents_for_guardianship
+  - action: utter_tell_about_required_documents_of_guardianship
+  - intent: goodbye
+  - action: utter_goodbye
+
+- story: interactive_story_1
+  steps:
+  - intent: ask_for_required_documents_for_guardianship
+  - action: utter_tell_about_required_documents_of_guardianship
+  - intent: ask_for_expense_on_case
+
+- story: interactive_story_2
+  steps:
+  - intent: ask_for_required_documents_for_guardianship
+  - action: utter_tell_about_required_documents_of_guardianship
+  - intent: ask_for_expense_on_case
+  - action: utter_tell_about_expense_of_case
+  - intent: ask_for_expense_on_case
+  - intent: ask_for_duration_of_case
+    entities:
+    - time: time
+  - action: utter_tell_about_duration_of_case
+  - intent: ask_legal_advice_for_guardianship
+  - action: utter_guardianship_legal_advice
+  - action: utter_tell_about_the_age_guardianship
+  - action: utter_tell_about_area_of_case
+  - intent: goodbye
+  - intent: fallback
+    entities:
+    - bot challenge: tm kese ho
+  - action: action_default_fallback
+  - action: action_default_fallback
+  - intent: ask_for_expense_on_case
+  - intent: ask_for_duration_of_case
+    entities:
+    - time: case me kitna time lag jay ga
+  - action: utter_tell_about_duration_of_case
+  - intent: ask_for_required_documents_for_guardianship
+  - action: utter_tell_about_required_documents_of_guardianship

@@ -1,0 +1,61 @@
+version: "3.1"
+nlu:
+- intent: greet
+  examples: |
+    - Assalam O Alaikum
+    - Assalam u Alaikum
+    - Salaam
+    - AOA
+    - good morning
+    - good evening
+    - AssalamO Alaikum
+    - hey there
+    - hello
+    - goodmorning
+    - goodevening
+    - good afternoon
+- intent: goodbye
+  examples: |
+    - Thank You bye
+    - good bye
+    - ThankYou bye
+    - bye
+    - goodbye
+    - or kuch nahi poochna Thank You
+    - bye bye
+    - bht shukrya
+    - okay thank you
+- intent: fallback
+  examples: |
+    - anything
+- intent: ask_legal_advice_for_guardianship
+  examples: |
+    - muje guardianship k baare me poochna hai.
+    - men apne bache ka guardian kese ban skta hun.
+    - men apne bache ki guardian kese ban skti hun.
+    - muje apne bache ki guardianship chaiye. Muje kese mil skti hai?
+    - Guardianship ka kya law hai Pakistan me?
+- intent: ask_for_duration_of_case
+  examples: |
+    - guardianship ka case kitni der tk chlta hai?
+    - court me case kitne time tk chle ga?
+    - guardianship k case ka duration kitna hota?
+    - mera case kitni der tk chal skta hai?
+    - or is pe time kitna lagta hai ?
+    - case pe total time kitna lagta hai ?
+    - is me mera kitna time lag jay ga ?[]{"entity": "time", "value": "time"}
+    - to is case me mera kitna time lag jay ga ?[]{"entity": "time", "value": "case me kitna time lag jay ga"}
+- intent: ask_for_expense_on_case
+  examples: |
+    - case pr kitna expense lag jata hai.
+    - agr me case krun to mera kitna expense hojay ga.[]{"entity": "expense", "value": "case krun to kitna expense"}
+    - agr me case krna chahun to mera kitna kharcha hojay ga.[]{"entity": "expense", "value": "case krna chahun kitna kharcha"}
+    - guardianship k case me kitne pese lagte hain.[]{"entity": "expense", "value": "guardianship case kitne pese"}
+    - agr men case kr lun to mera total kitne pese lag skte hain?
+    - agr me is pr case kru to mera kitna kharcha hojay ga
+- intent: ask_for_required_documents_for_guardianship
+  examples: |
+    - is me kon kon se documents chaiye honge?[]{"entity": "ask for documents", "value": "kon se document"}
+    - guardianship ka case krne k liye kon kon se documents lagen ge?[]{"entity": "ask for documents", "value": "guardianship case documents"}
+    - agr mene case krna ho to kon kon se documents lgae gen.
+    - muje kon kon se documents chaiye honge is me case krne k liye
