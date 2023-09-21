@@ -59,3 +59,10 @@ nlu:
     - guardianship ka case krne k liye kon kon se documents lagen ge?[]{"entity": "ask for documents", "value": "guardianship case documents"}
     - agr mene case krna ho to kon kon se documents lgae gen.
     - muje kon kon se documents chaiye honge is me case krne k liye
+- intent: ask_for_court_location_in_lahore
+  examples:  |
+    - lahore me family court me case krna ho to kahan krna ho ga?[]{"entity": "ask for location of courts", "value": "lahore me family courts kahan hai"}
+    - lahore me family courts kahan hain?
+    - men ye case kahan krwaun?[]{"entity": "ask for location of courts", "value": "ye case kahan krwaun"}
+    - men ye case kahan ja k kraun?
+

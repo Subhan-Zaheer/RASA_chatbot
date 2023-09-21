@@ -16,6 +16,8 @@ stories:
   - action: utter_tell_about_expense_of_case
   - intent: ask_for_required_documents_for_guardianship
   - action: utter_tell_about_required_documents_of_guardianship
+  - intent: ask_for_court_location_in_lahore
+  - action: utter_tell_about_location_of_court
 
 
 - story: user just ask for sections under the law
@@ -62,6 +64,7 @@ stories:
   - intent: ask_for_required_documents_for_guardianship
   - action: utter_tell_about_required_documents_of_guardianship
   - intent: ask_for_expense_on_case
+  - action: utter_tell_about_expense_of_case
 
 - story: interactive_story_2
   steps:
@@ -79,15 +82,25 @@ stories:
   - action: utter_tell_about_the_age_guardianship
   - action: utter_tell_about_area_of_case
   - intent: goodbye
+  - action: utter_goodbye
   - intent: fallback
     entities:
     - bot challenge: tm kese ho
   - action: action_default_fallback
-  - action: action_default_fallback
   - intent: ask_for_expense_on_case
+  - action: utter_tell_about_expense_of_case
   - intent: ask_for_duration_of_case
     entities:
     - time: case me kitna time lag jay ga
   - action: utter_tell_about_duration_of_case
   - intent: ask_for_required_documents_for_guardianship
   - action: utter_tell_about_required_documents_of_guardianship
+
+- story: user_just_ask_for_court_location
+  steps:
+  - intent: greet
+  - action: utter_greet
+  - intent: ask_for_court_location_in_lahore
+  - action: utter_tell_about_location_of_court
+  - intent: goodbye
+  - action: utter_goodbye

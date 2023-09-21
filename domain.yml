@@ -10,7 +10,8 @@ intents:
 - ask_for_expense_on_case
 - ask_for_required_documents_for_guardianship
 - ask_legal_advice_for_guardianship
-- ask_for_court_location
+- ask_for_court_location_in_lahore
+- fallback
 - goodbye
 - greet
 responses:
@@ -53,12 +54,18 @@ responses:
   utter_tell_about_required_documents_of_guardianship:
   - text: |-
       Guardianship k case k liye aap ko following documents chaiye honge.
-       1. Nikkah Nama 2. Birth Certificate of Minor(Child).
+       1. Nikkah Nama
+       2. Birth Certificate of Minor(Child).
   utter_tell_about_the_age_guardianship:
   - text: |-
       Guardianship ki age Male Bache k liye 18 years hai 
-       Female bache k liye Shadi ki age tk hai. 
-       Agr bache ki age is se zyada hai to us ki Guardianship claim nahi hoskti... 
+      Female bache k liye Shadi ki age tk hai. 
+      Agr bache ki age is se zyada hai to us ki Guardianship claim nahi hoskti... 
+  utter_tell_about_location_of_court:
+  - text: |-
+      Lahore me Family courts Aiwan-e-Adal Civil Sectrate me hain.
+      Us k ilawa aap apne ghr k paas k kisi bi District court me kisi bi Lawyer se mil skte hain.
+  
 session_config:
   session_expiration_time: 60
   carry_over_slots_to_new_session: true
