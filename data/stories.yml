@@ -104,3 +104,10 @@ stories:
   - action: utter_tell_about_location_of_court
   - intent: goodbye
   - action: utter_goodbye
+
+- story: interactive_story_1
+  steps:
+  - intent: ask_for_court_location_in_lahore
+  - action: utter_tell_about_location_of_court
+  - intent: ask_for_court_location_in_lahore
+  - action: utter_tell_about_location_of_court

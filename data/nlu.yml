@@ -60,9 +60,12 @@ nlu:
     - agr mene case krna ho to kon kon se documents lgae gen.
     - muje kon kon se documents chaiye honge is me case krne k liye
 - intent: ask_for_court_location_in_lahore
-  examples:  |
+  examples: |
     - lahore me family court me case krna ho to kahan krna ho ga?[]{"entity": "ask for location of courts", "value": "lahore me family courts kahan hai"}
     - lahore me family courts kahan hain?
     - men ye case kahan krwaun?[]{"entity": "ask for location of courts", "value": "ye case kahan krwaun"}
     - men ye case kahan ja k kraun?
-
+    - men apna case kis jagah krun[]{"entity": "ask for location of courts", "value": "case kis jagah krun"}
+    - men ye case kahan file kr skta hun[][]{"entity": "ask for location of courts", "value": "case kahan file kr skta"}
+    - men lahore me case kis jagah ja k kr skta hun
+    - agr mene case file krna ho to kahan jaun...

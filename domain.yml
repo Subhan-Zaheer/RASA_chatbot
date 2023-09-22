@@ -1,16 +1,17 @@
 version: '3.1'
 actions:
+- utter_tell_about_location_of_court
 - utter_tell_about_duration_of_case
 - utter_tell_about_expense_of_case
 - utter_guardianship_legal_advice
 - utter_tell_about_required_documents_of_guardianship
 - action_fallback
 intents:
+- ask_for_court_location_in_lahore
 - ask_for_duration_of_case
 - ask_for_expense_on_case
 - ask_for_required_documents_for_guardianship
 - ask_legal_advice_for_guardianship
-- ask_for_court_location_in_lahore
 - fallback
 - goodbye
 - greet
@@ -65,7 +66,6 @@ responses:
   - text: |-
       Lahore me Family courts Aiwan-e-Adal Civil Sectrate me hain.
       Us k ilawa aap apne ghr k paas k kisi bi District court me kisi bi Lawyer se mil skte hain.
-  
 session_config:
   session_expiration_time: 60
   carry_over_slots_to_new_session: true
