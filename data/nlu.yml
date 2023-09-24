@@ -25,6 +25,14 @@ nlu:
     - bye bye
     - bht shukrya
     - okay thank you
+    - thank you goodbye
+- intent: affirm
+  examples: |
+    - yes
+    - Yes
+- intent: deny
+  examples: |
+    - no
 - intent: fallback
   examples: |
     - anything
@@ -35,6 +43,7 @@ nlu:
     - men apne bache ki guardian kese ban skti hun.
     - muje apne bache ki guardianship chaiye. Muje kese mil skti hai?
     - Guardianship ka kya law hai Pakistan me?
+    - muje apne bache ki guardianship kese mil skti hai?
 - intent: ask_for_duration_of_case
   examples: |
     - guardianship ka case kitni der tk chlta hai?
@@ -45,6 +54,7 @@ nlu:
     - case pe total time kitna lagta hai ?
     - is me mera kitna time lag jay ga ?[]{"entity": "time", "value": "time"}
     - to is case me mera kitna time lag jay ga ?[]{"entity": "time", "value": "case me kitna time lag jay ga"}
+    - to mera case kitna lamba chle ga
 - intent: ask_for_expense_on_case
   examples: |
     - case pr kitna expense lag jata hai.
@@ -53,12 +63,16 @@ nlu:
     - guardianship k case me kitne pese lagte hain.[]{"entity": "expense", "value": "guardianship case kitne pese"}
     - agr men case kr lun to mera total kitne pese lag skte hain?
     - agr me is pr case kru to mera kitna kharcha hojay ga
+    - or agr me case krun to mera kharcha kitna hojay ga case pr
+    - guardianship ka case k liye muje kitne pese dene paren ge?
 - intent: ask_for_required_documents_for_guardianship
   examples: |
     - is me kon kon se documents chaiye honge?[]{"entity": "ask for documents", "value": "kon se document"}
     - guardianship ka case krne k liye kon kon se documents lagen ge?[]{"entity": "ask for documents", "value": "guardianship case documents"}
     - agr mene case krna ho to kon kon se documents lgae gen.
     - muje kon kon se documents chaiye honge is me case krne k liye
+    - or ye case krne k liye kon kon se documents chaiye honge
+    - muje guardianship ka case krne k liye kya kya chaiye hoga ? yani kon kon se documents lage ge
 - intent: ask_for_court_location_in_lahore
   examples: |
     - lahore me family court me case krna ho to kahan krna ho ga?[]{"entity": "ask for location of courts", "value": "lahore me family courts kahan hai"}
@@ -69,3 +83,4 @@ nlu:
     - men ye case kahan file kr skta hun[][]{"entity": "ask for location of courts", "value": "case kahan file kr skta"}
     - men lahore me case kis jagah ja k kr skta hun
     - agr mene case file krna ho to kahan jaun...
+    - to muje case krna k liye kahan jana pare ga

@@ -18,6 +18,14 @@ stories:
   - action: utter_tell_about_required_documents_of_guardianship
   - intent: ask_for_court_location_in_lahore
   - action: utter_tell_about_location_of_court
+  - intent: goodbye
+  - action: utter_ask_for_reverting_guardianship
+  - intent: affirm
+  - action: action_continue
+  - intent: deny
+  - action: action_stop
+  - intent: goodbye
+  - action: utter_goodbye
 
 
 - story: user just ask for sections under the law
@@ -111,3 +119,68 @@ stories:
   - action: utter_tell_about_location_of_court
   - intent: ask_for_court_location_in_lahore
   - action: utter_tell_about_location_of_court
+
+- story: bot_ask_for_reverting_guardianship
+  steps:
+  - intent: affirm
+  - action: action_continue
+
+- story: bot_ask_for_reverting_guardianship_NO
+  steps:
+  - intent: deny
+  - action: action_stop
+
+- story: if_user_doesnot_ask_for_anything_about_guardianship_just_greet_and_goodbye
+  steps:
+  - intent: greet
+  - action: utter_greet
+  - intent: goodbye
+  - action: utter_goodbye
+
+
+- story: interactive_story_1
+  steps:
+  - intent: greet
+  - action: utter_greet
+  - intent: ask_legal_advice_for_guardianship
+  - action: utter_guardianship_legal_advice
+  - action: utter_tell_about_the_age_guardianship
+  - action: utter_tell_about_area_of_case
+  - intent: ask_for_duration_of_case
+  - action: utter_tell_about_duration_of_case
+  - intent: ask_for_expense_on_case
+  - action: utter_tell_about_expense_of_case
+  - intent: ask_for_required_documents_for_guardianship
+  - action: utter_tell_about_required_documents_of_guardianship
+  - intent: ask_for_court_location_in_lahore
+  - action: utter_tell_about_location_of_court
+  - intent: goodbye
+  - action: utter_ask_for_reverting_guardianship
+  - intent: affirm
+  - action: action_continue
+  - intent: goodbye
+  - action: utter_goodbye
+
+- story: interactive_story_1
+  steps:
+  - intent: greet
+  - action: utter_greet
+  - intent: goodbye
+  - action: utter_goodbye
+  - intent: ask_for_required_documents_for_guardianship
+  - action: utter_tell_about_required_documents_of_guardianship
+  - intent: goodbye
+  - action: utter_ask_for_reverting_guardianship
+  - intent: deny
+  - action: action_stop
+
+- story: interactive_story_1
+  steps:
+  - intent: greet
+  - action: utter_greet
+  - intent: ask_for_expense_on_case
+  - action: utter_tell_about_expense_of_case
+  - intent: goodbye
+  - action: utter_ask_for_reverting_guardianship
+  - intent: deny
+  - action: action_stop

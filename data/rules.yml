@@ -2,10 +2,16 @@ version: "3.1"
 
 rules:
 
-- rule: Say goodbye anytime the user says goodbye
-  steps:
-  - intent: goodbye
-  - action: utter_goodbye
+# - rule: Say goodbye anytime the user says goodbye
+#   steps:
+#   - intent: goodbye
+#   - action: utter_ask_for_reverting_guardianship
+#   - intent: affirm
+#   - action: action_continue
+#   - intent: deny
+#   - action: action_stop
+#   - intent: goodbye
+#   - action: utter_goodbye
 
 - rule: Say 'I am a bot' anytime the user challenges
   steps:

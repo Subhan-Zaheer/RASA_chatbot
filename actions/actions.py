@@ -7,11 +7,12 @@
 
 # This is a simple example for a custom action which utters "Hello World!"
 
-# from typing import Any, Text, Dict, List
+from typing import Any, Text, Dict, List
 #
-# from rasa_sdk import Action, Tracker
-# from rasa_sdk.executor import CollectingDispatcher
-# from rasa_sdk.events import UserUtteranceReverted
+import rasa_sdk
+from rasa_sdk import Action, Tracker
+from rasa_sdk.executor import CollectingDispatcher
+from rasa_sdk.events import UserUtteranceReverted
 #
 #
 #
@@ -45,3 +46,27 @@
 
 #         # Revert user message which led to fallback.
 #         return [UserUtteranceReverted()]
+
+class ActionYes(Action):
+    def name(self) -> Text:
+        return "action_continue"
+
+    def run(
+        self, dispatcher: CollectingDispatcher, tracker: Tracker, domain: Dict[Text, Any]
+    ) -> List[Dict[Text, Any]]:
+        # Implement logic to continue the conversation
+        dispatcher.utter_message("Agr aapko lagta hai k aap ka opponent minor (child) ki tarbiyat, ya growth sahi nahi kr raha, ya us ne doosri shadi kr li hai, ya us k financial halaat ese nahi hain k wo achi growth kr ske, ya uska character sahi nahi hai to aap court me appeal kr skte hain guardianship ka right lene k liye.")
+        # Your logic here...
+        return []
+
+class ActionStop(Action):
+    def name(self) -> Text:
+        return "action_stop"
+
+    def run(
+        self, dispatcher: CollectingDispatcher, tracker: Tracker, domain: Dict[Text, Any]
+    ) -> List[Dict[Text, Any]]:
+        # Implement logic to stop the conversation
+        dispatcher.utter_message("Okay, let's stop here.")
+        # Your logic here...
+        return []

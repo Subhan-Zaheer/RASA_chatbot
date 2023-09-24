@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Rasa Core Visualisation</title>
+    <script src="https://dagrejs.github.io/project/dagre-d3/latest/dagre-d3.min.js"></script>
+    <script src="https://dagrejs.github.io/project/dagre/latest/dagre.min.js"></script>
+    <script src="https://d3js.org/d3.v4.js"></script>
+    <script src="https://dagrejs.github.io/project/graphlib-dot/v0.6.3/graphlib-dot.js"></script>
+</head>
+<body>
+<div id="errormsg" style="color: #b00"></div>
+<svg>
+    <style id="graph-style">
+        .node.invisible > rect {
+            display: none;
+        }
+
+        .node.start > rect {
+            fill: #7f7;
+            rx: 30;
+            ry: 18;
+        }
+
+        .node.end > rect {
+            fill: #f77;
+            rx: 30;
+            ry: 18;
+        }
+
+        .node:not(.active) > rect, .node:not(.active) > .label {
+            opacity: 0.4;
+        }
+
+        .edgePath:not(.active) path {
+            opacity: 0.4;
+        }
+
+        .node.ellipsis > rect {
+            fill: #CCC;
+        }
+
+        .node.intent > rect {
+            fill: #7ff;
+        }
+
+        .node.dashed > rect {
+            stroke-dasharray: 5;
+        }
+
+        text {
+            font-weight: 300;
+            font-family: "Helvetica Neue", Helvetica, Arial, sans-serf, serif;
+            font-size: 14px;
+            color: #1f1d1d;
+        }
+
+        .node rect {
+            stroke: #444;
+            fill: #fff;
+            stroke-width: 1.5px;
+        }
+
+        .edgePath path {
+            stroke: #333;
+            stroke-width: 1.5px;
+        }
+
+        svg {
+            position: fixed;
+            top: 10px;
+            left: 0;
+            height: 100%;
+            width: 100%
+        }
+    </style>
+    <g></g>
+</svg>
+<script>
+
+  function serveGraph() {
+    let oldInputGraphValue;
+
+    const url = 'visualization.dot';
+    const refreshInterval = 500;
+
+    // trigger a refresh by fetching an updated graph
+    setInterval(function () {
+      fetch(url).then(r => r.text()).then(dot => {
+        document.getElementById('errormsg').innerHTML = '';
+        if (oldInputGraphValue === dot) return;
+
+        oldInputGraphValue = dot;
+        drawGraph(dot);
+      }).catch(err => {
+        document.getElementById('errormsg').innerHTML =
+          'Failed to update plot. (' + err.message + ')';
+      });
+    }, refreshInterval);
+  }
+
+  function drawGraph(graph) {
+    let g = graphlibDot.read(graph);
+    // Set margins, if not present
+    if (!g.graph().hasOwnProperty("marginx") &&
+      !g.graph().hasOwnProperty("marginy")) {
+      g.graph().marginx = 20;
+      g.graph().marginy = 20;
+    }
+    g.graph().transition = function (selection) {
+      return selection.transition().duration(300);
+    };
+    // Render the graph into svg g
+    d3.select("svg g").call(render, g);
+  }
+  // Set up zoom support
+  const svg = d3.select("svg"),
+    inner = d3.select("svg g"),
+    zoom = d3.zoom().on("zoom", function () {
+      inner.attr("transform", d3.event.transform);
+    });
+  svg.call(zoom);
+
+  // Create and configure the renderer
+  const render = dagreD3.render();
+
+  let isClient = false;
+  isClient = true;
+
+  if (isClient) {
+    // Mark all nodes and their edges as active
+    cssRules = document.getElementById('graph-style').sheet.cssRules;
+    cssRules[3].style.opacity = 1;
+    cssRules[4].style.opacity = 1;
+
+    let graph;
+    graph = `digraph  {
+0 [class="start active", fillcolor=green, fontsize=12, label=START, style=filled];
+"-1" [class=end, fillcolor=red, fontsize=12, label=END, style=filled];
+1 [class="", fontsize=12, label=utter_greet];
+2 [class="", fontsize=12, label=utter_tell_about_location_of_court];
+3 [class="", fontsize=12, label=utter_goodbye];
+5 [class="", fontsize=12, label=utter_guardianship_legal_advice];
+6 [class="", fontsize=12, label=utter_tell_about_the_age_guardianship];
+7 [class="", fontsize=12, label=utter_tell_about_area_of_case];
+8 [class="", fontsize=12, label=utter_tell_about_duration_of_case];
+9 [class="", fontsize=12, label=utter_tell_about_expense_of_case];
+10 [class="", fontsize=12, label=utter_tell_about_required_documents_of_guardianship];
+11 [class="", fontsize=12, label=utter_tell_about_location_of_court];
+18 [class="", fontsize=12, label=utter_tell_about_duration_of_case];
+21 [class="", fontsize=12, label=utter_tell_about_expense_of_case];
+24 [class="", fontsize=12, label=utter_tell_about_required_documents_of_guardianship];
+26 [class="", fontsize=12, label=utter_tell_about_required_documents_of_guardianship];
+27 [class="", fontsize=12, label=utter_tell_about_expense_of_case];
+30 [class="", fontsize=12, label=utter_tell_about_duration_of_case];
+34 [class="", fontsize=12, label=utter_goodbye];
+35 [class="", fontsize=12, label=action_default_fallback];
+36 [class="", fontsize=12, label=utter_tell_about_expense_of_case];
+37 [class="", fontsize=12, label=utter_tell_about_duration_of_case];
+38 [class="", fontsize=12, label=utter_tell_about_required_documents_of_guardianship];
+39 [class="", fontsize=12, label="..."];
+42 [class="", fontsize=12, label=utter_iamabot];
+43 [class=intent, fillcolor=lightblue, label=AOA, shape=rect, style=filled];
+44 [class=intent, fillcolor=lightblue, label="agr mene case krna ho to kon kon se documents lgae gen.", shape=rect, style=filled];
+45 [class=intent, fillcolor=lightblue, label="men ye case kahan ja k kraun?", shape=rect, style=filled];
+46 [class=intent, fillcolor=lightblue, label="muje guardianship k baare me poochna hai.", shape=rect, style=filled];
+47 [class=intent, fillcolor=lightblue, label="case pe total time kitna lagta hai ?", shape=rect, style=filled];
+48 [class=intent, fillcolor=lightblue, label="agr me case krun to mera kitna expense hojay ga.[]{\\"entity\\": \\"expense\\", \\"value\\": \\"case krun to kitna expense\\"}", shape=rect, style=filled];
+49 [class=intent, fillcolor=lightblue, label="agr mene case krna ho to kon kon se documents lgae gen.", shape=rect, style=filled];
+50 [class=intent, fillcolor=lightblue, label="okay thank you", shape=rect, style=filled];
+51 [class=intent, fillcolor=lightblue, label="is me mera kitna time lag jay ga ?[]{\\"entity\\": \\"time\\", \\"value\\": \\"time\\"}", shape=rect, style=filled];
+52 [class=intent, fillcolor=lightblue, label="bye bye", shape=rect, style=filled];
+53 [class=intent, fillcolor=lightblue, label="bht shukrya", shape=rect, style=filled];
+54 [class=intent, fillcolor=lightblue, label="agr me case krna chahun to mera kitna kharcha hojay ga.[]{\\"entity\\": \\"expense\\", \\"value\\": \\"case krna chahun kitna kharcha\\"}", shape=rect, style=filled];
+55 [class=intent, fillcolor=lightblue, label="muje kon kon se documents chaiye honge is me case krne k liye", shape=rect, style=filled];
+56 [class=intent, fillcolor=lightblue, label="men ye case kahan ja k kraun?", shape=rect, style=filled];
+57 [class=intent, fillcolor=lightblue, label=bye, shape=rect, style=filled];
+58 [class=intent, fillcolor=lightblue, label="good bye", shape=rect, style=filled];
+59 [class=intent, fillcolor=lightblue, label=goodbye, shape=rect, style=filled];
+60 [class=intent, fillcolor=lightblue, label="agr me case krna chahun to mera kitna kharcha hojay ga.[]{\\"entity\\": \\"expense\\", \\"value\\": \\"case krna chahun kitna kharcha\\"}", shape=rect, style=filled];
+61 [class=intent, fillcolor=lightblue, label="guardianship ka case kitni der tk chlta hai?", shape=rect, style=filled];
+62 [class=intent, fillcolor=lightblue, label="men apne bache ki guardian kese ban skti hun.", shape=rect, style=filled];
+63 [class=intent, fillcolor=lightblue, label=anything, shape=rect, style=filled];
+64 [class=intent, fillcolor=lightblue, label="agr me is pr case kru to mera kitna kharcha hojay ga", shape=rect, style=filled];
+65 [class=intent, fillcolor=lightblue, label="case pe total time kitna lagta hai ?", shape=rect, style=filled];
+66 [class=intent, fillcolor=lightblue, label="muje kon kon se documents chaiye honge is me case krne k liye", shape=rect, style=filled];
+67 [class=intent, fillcolor=lightblue, label="good bye", shape=rect, style=filled];
+68 [class=intent, fillcolor=lightblue, label="/bot_challenge", shape=rect, style=filled];
+0 -> 39  [class="", key=NONE, label=""];
+0 -> 43  [class="", key=0];
+0 -> 44  [class="", key=0];
+1 -> 45  [class="", key=0];
+1 -> 46  [class="", key=0];
+1 -> 47  [class="", key=0];
+1 -> 48  [class="", key=0];
+1 -> 49  [class="", key=0];
+2 -> 50  [class="", key=0];
+3 -> "-1"  [class="", key=NONE, label=""];
+5 -> 6  [class="", key=NONE, label=""];
+6 -> 7  [class="", key=NONE, label=""];
+7 -> 51  [class="", key=0];
+7 -> 52  [class="", key=0];
+7 -> 53  [class="", key=0];
+8 -> 54  [class="", key=0];
+9 -> 55  [class="", key=0];
+10 -> 56  [class="", key=0];
+11 -> "-1"  [class="", key=NONE, label=""];
+18 -> 57  [class="", key=0];
+21 -> 58  [class="", key=0];
+24 -> 59  [class="", key=0];
+26 -> 60  [class="", key=0];
+27 -> "-1"  [class="", key=NONE, label=""];
+27 -> 61  [class="", key=0];
+30 -> 62  [class="", key=0];
+34 -> 63  [class="", key=0];
+35 -> 64  [class="", key=0];
+36 -> 65  [class="", key=0];
+37 -> 66  [class="", key=0];
+38 -> "-1"  [class="", key=NONE, label=""];
+39 -> 67  [class="", key=0];
+39 -> 68  [class="", key=0];
+42 -> "-1"  [class="", key=NONE, label=""];
+43 -> 1  [class="", key=0];
+44 -> 26  [class="", key=0];
+45 -> 2  [class="", key=0];
+46 -> 5  [class="", key=0];
+47 -> 18  [class="", key=0];
+48 -> 21  [class="", key=0];
+49 -> 24  [class="", key=0];
+50 -> 3  [class="", key=0];
+51 -> 8  [class="", key=0];
+52 -> 3  [class="", key=0];
+53 -> 34  [class="", key=0];
+54 -> 9  [class="", key=0];
+55 -> 10  [class="", key=0];
+56 -> 11  [class="", key=0];
+57 -> 3  [class="", key=0];
+58 -> 3  [class="", key=0];
+59 -> 3  [class="", key=0];
+60 -> 27  [class="", key=0];
+61 -> 30  [class="", key=0];
+62 -> 5  [class="", key=0];
+63 -> 35  [class="", key=0];
+64 -> 36  [class="", key=0];
+65 -> 37  [class="", key=0];
+66 -> 38  [class="", key=0];
+67 -> 3  [class="", key=0];
+68 -> 42  [class="", key=0];
+}
+`;
+    drawGraph(graph);
+  } else {
+    serveGraph();
+  }
+
+
+</script>
+</body>
+</html>
